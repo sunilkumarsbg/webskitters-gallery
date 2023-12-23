@@ -5,35 +5,53 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';    // Import your PhotoModel
 import 'package:gallery_saver/gallery_saver.dart';
+import 'package:photo/resource/color.dart';
+import 'package:photo/resource/function.dart';
 
 class ImageDetailPage extends StatelessWidget {
   String image;
   ImageDetailPage({required this.image});
+
   Future<void> downloadAndSaveImage(String imageUrl) async {
-    final response = await http.get(Uri.parse(imageUrl));
-    if (response.statusCode == 200) {
-      final appDir = await getTemporaryDirectory();
-      final fileName = imageUrl.split('/').last;
-      final filePath = '${appDir.path}/$fileName';
-      await File(filePath).writeAsBytes(response.bodyBytes);
-      await GallerySaver.saveImage(filePath);
+    try {
+      final response = await http.get(Uri.parse(imageUrl));
 
-      print('Image saved to gallery');
-
-    } else {
-      print('Failed to download image');
-
+      if (response.statusCode == 200) {
+        final appDir = await getTemporaryDirectory();
+        final fileName = imageUrl.split('/').last;
+        final filePath = '${appDir.path}/$fileName';
+        await File(filePath).writeAsBytes(response.bodyBytes);
+        // Check if the file is an image by its extension
+        bool isImage = _isImageFile(fileName);
+        if (isImage) {
+          await GallerySaver.saveImage(filePath);
+          print('Image saved to gallery');
+        } else {
+          print('File is not recognized as an image');
+        }
+      } else {
+        print('Failed to download image');
+      }
+    } catch (e) {
+      print('Error downloading image: $e');
     }
+  }
+
+  bool _isImageFile(String filePath) {
+    final validImageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp'];
+    final fileExtension = filePath.toLowerCase().substring(filePath.lastIndexOf('.'));
+    return validImageExtensions.contains(fileExtension);
   }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Image Review"),
-        centerTitle: true,
-        backgroundColor: Colors.orangeAccent,
+      appBar:
+      CustomAppBar(
+        titleText: 'Image Review',
+        backgroundColor: ColorSelect.primaryColor,
+        // You can customize other properties here if needed
       ),
       body: Padding(
         padding: EdgeInsets.all(4.0),

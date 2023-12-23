@@ -3,7 +3,9 @@
 //     final photoModel = photoModelFromJson(jsonString);
 
 import 'dart:convert';
+
 List<PhotoModel> photoModelFromJson(String str) => List<PhotoModel>.from(json.decode(str).map((x) => PhotoModel.fromJson(x)));
+
 String photoModelToJson(List<PhotoModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class PhotoModel {
@@ -339,82 +341,112 @@ class Social {
 }
 
 class TopicSubmissions {
-  Experimental? film;
-  ArchitectureInterior? people;
-  ArchitectureInterior? spirituality;
-  Experimental? experimental;
-  ArchitectureInterior? streetPhotography;
-  ArchitectureInterior? texturesPatterns;
-  ArchitectureInterior? architectureInterior;
-  ArchitectureInterior? wallpapers;
+  BusinessWork? wallpapers;
+  The3DRenders? experimental;
+  The3DRenders? film;
+  The3DRenders? spirituality;
+  The3DRenders? people;
+  The3DRenders? fashionBeauty;
+  The3DRenders? texturesPatterns;
+  The3DRenders? the3DRenders;
+  BusinessWork? businessWork;
+  The3DRenders? travel;
+  The3DRenders? architectureInterior;
+  The3DRenders? streetPhotography;
+  The3DRenders? nature;
 
   TopicSubmissions({
-    this.film,
-    this.people,
-    this.spirituality,
-    this.experimental,
-    this.streetPhotography,
-    this.texturesPatterns,
-    this.architectureInterior,
     this.wallpapers,
+    this.experimental,
+    this.film,
+    this.spirituality,
+    this.people,
+    this.fashionBeauty,
+    this.texturesPatterns,
+    this.the3DRenders,
+    this.businessWork,
+    this.travel,
+    this.architectureInterior,
+    this.streetPhotography,
+    this.nature,
   });
 
   factory TopicSubmissions.fromJson(Map<String, dynamic> json) => TopicSubmissions(
-    film: json["film"] == null ? null : Experimental.fromJson(json["film"]),
-    people: json["people"] == null ? null : ArchitectureInterior.fromJson(json["people"]),
-    spirituality: json["spirituality"] == null ? null : ArchitectureInterior.fromJson(json["spirituality"]),
-    experimental: json["experimental"] == null ? null : Experimental.fromJson(json["experimental"]),
-    streetPhotography: json["street-photography"] == null ? null : ArchitectureInterior.fromJson(json["street-photography"]),
-    texturesPatterns: json["textures-patterns"] == null ? null : ArchitectureInterior.fromJson(json["textures-patterns"]),
-    architectureInterior: json["architecture-interior"] == null ? null : ArchitectureInterior.fromJson(json["architecture-interior"]),
-    wallpapers: json["wallpapers"] == null ? null : ArchitectureInterior.fromJson(json["wallpapers"]),
+    wallpapers: json["wallpapers"] == null ? null : BusinessWork.fromJson(json["wallpapers"]),
+    experimental: json["experimental"] == null ? null : The3DRenders.fromJson(json["experimental"]),
+    film: json["film"] == null ? null : The3DRenders.fromJson(json["film"]),
+    spirituality: json["spirituality"] == null ? null : The3DRenders.fromJson(json["spirituality"]),
+    people: json["people"] == null ? null : The3DRenders.fromJson(json["people"]),
+    fashionBeauty: json["fashion-beauty"] == null ? null : The3DRenders.fromJson(json["fashion-beauty"]),
+    texturesPatterns: json["textures-patterns"] == null ? null : The3DRenders.fromJson(json["textures-patterns"]),
+    the3DRenders: json["3d-renders"] == null ? null : The3DRenders.fromJson(json["3d-renders"]),
+    businessWork: json["business-work"] == null ? null : BusinessWork.fromJson(json["business-work"]),
+    travel: json["travel"] == null ? null : The3DRenders.fromJson(json["travel"]),
+    architectureInterior: json["architecture-interior"] == null ? null : The3DRenders.fromJson(json["architecture-interior"]),
+    streetPhotography: json["street-photography"] == null ? null : The3DRenders.fromJson(json["street-photography"]),
+    nature: json["nature"] == null ? null : The3DRenders.fromJson(json["nature"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "film": film?.toJson(),
-    "people": people?.toJson(),
-    "spirituality": spirituality?.toJson(),
-    "experimental": experimental?.toJson(),
-    "street-photography": streetPhotography?.toJson(),
-    "textures-patterns": texturesPatterns?.toJson(),
-    "architecture-interior": architectureInterior?.toJson(),
     "wallpapers": wallpapers?.toJson(),
+    "experimental": experimental?.toJson(),
+    "film": film?.toJson(),
+    "spirituality": spirituality?.toJson(),
+    "people": people?.toJson(),
+    "fashion-beauty": fashionBeauty?.toJson(),
+    "textures-patterns": texturesPatterns?.toJson(),
+    "3d-renders": the3DRenders?.toJson(),
+    "business-work": businessWork?.toJson(),
+    "travel": travel?.toJson(),
+    "architecture-interior": architectureInterior?.toJson(),
+    "street-photography": streetPhotography?.toJson(),
+    "nature": nature?.toJson(),
   };
 }
 
-class ArchitectureInterior {
-  String status;
+class The3DRenders {
+  Status status;
 
-  ArchitectureInterior({
+  The3DRenders({
     required this.status,
   });
 
-  factory ArchitectureInterior.fromJson(Map<String, dynamic> json) => ArchitectureInterior(
+  factory The3DRenders.fromJson(Map<String, dynamic> json) => The3DRenders(
+    status: statusValues.map[json["status"]]!,
+  );
+
+  Map<String, dynamic> toJson() => {
+    "status": statusValues.reverse[status],
+  };
+}
+
+enum Status {
+  REJECTED,
+  UNEVALUATED
+}
+
+final statusValues = EnumValues({
+  "rejected": Status.REJECTED,
+  "unevaluated": Status.UNEVALUATED
+});
+
+class BusinessWork {
+  String status;
+  DateTime? approvedOn;
+
+  BusinessWork({
+    required this.status,
+    this.approvedOn,
+  });
+
+  factory BusinessWork.fromJson(Map<String, dynamic> json) => BusinessWork(
     status: json["status"],
+    approvedOn: json["approved_on"] == null ? null : DateTime.parse(json["approved_on"]),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
-  };
-}
-
-class Experimental {
-  String status;
-  DateTime approvedOn;
-
-  Experimental({
-    required this.status,
-    required this.approvedOn,
-  });
-
-  factory Experimental.fromJson(Map<String, dynamic> json) => Experimental(
-    status: json["status"],
-    approvedOn: DateTime.parse(json["approved_on"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "status": status,
-    "approved_on": approvedOn.toIso8601String(),
+    "approved_on": approvedOn?.toIso8601String(),
   };
 }
 
@@ -452,4 +484,16 @@ class Urls {
     "thumb": thumb,
     "small_s3": smallS3,
   };
+}
+
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }

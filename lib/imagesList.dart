@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:photo/Model/model.dart';
 import 'package:photo/imageDetails.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:photo/resource/style.dart';
+
 
 class ImagesTile extends StatelessWidget {
   final PhotoModel imagesList;
@@ -56,8 +58,7 @@ class ImagesTile extends StatelessWidget {
               Text(
                 imagesList.altDescription,
                 maxLines: 2,
-                style: TextStyle(
-                    fontFamily: 'avenir', fontWeight: FontWeight.w800),
+                style:CustomStyles.styleDesText,
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
@@ -79,7 +80,7 @@ class ImagesTile extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left:8),
-                              child: Text("View Image",   style: TextStyle(color: Colors.white,fontSize: 13),),
+                              child: Text("View Image",   style: CustomStyles.styleF13White),
                             )
                           ],
                         ),
