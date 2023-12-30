@@ -18,21 +18,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:
-        CustomAppBar(
+        appBar: const CustomAppBar(
           titleText: 'Photo',
           backgroundColor: ColorSelect.primaryColor,
-          // You can customize other properties here if needed
         ),
-        // AppBar(
-        //   title: const Text("Photo"),
-        //   centerTitle: true,
-        //   backgroundColor: Colors.orangeAccent,
-        // ),
         body: Obx(() {
-          if (imageController.isLoading.value)
-            return Center(child: CircularProgressIndicator());
-          else
+          if (imageController.isLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
             return StaggeredGridView.countBuilder(
               crossAxisCount: 2,
               itemCount: imageController.imagesList.length,
@@ -41,8 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 return ImagesTile(imageController.imagesList[index]);
               },
-              staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+              staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
             );
+          }
         }));
   }
 }

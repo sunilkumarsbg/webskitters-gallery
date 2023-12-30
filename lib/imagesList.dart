@@ -4,7 +4,6 @@ import 'package:photo/imageDetails.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:photo/resource/style.dart';
 
-
 class ImagesTile extends StatelessWidget {
   final PhotoModel imagesList;
   const ImagesTile(this.imagesList);
@@ -58,7 +57,7 @@ class ImagesTile extends StatelessWidget {
               Text(
                 imagesList.altDescription,
                 maxLines: 2,
-                style:CustomStyles.styleDesText,
+                style: CustomStyles.styleDesText,
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
@@ -69,8 +68,8 @@ class ImagesTile extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                       color: Colors.orangeAccent.withOpacity(0.5),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left:16),
+                    child: const Padding(
+                      padding: EdgeInsets.only(left: 16),
                       child: Center(
                         child: Row(
                           children: [
@@ -79,8 +78,9 @@ class ImagesTile extends StatelessWidget {
                               color: Colors.white,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left:8),
-                              child: Text("View Image",   style: CustomStyles.styleF13White),
+                              padding: EdgeInsets.only(left: 8),
+                              child: Text("View Image",
+                                  style: CustomStyles.styleF13White),
                             )
                           ],
                         ),
