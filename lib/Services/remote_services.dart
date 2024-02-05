@@ -1,22 +1,21 @@
 import 'package:http/http.dart' as http;
 import '../Model/model.dart';
+import '../resource/constant.dart';
 
 class RemoteServices {
   static var client = http.Client();
-
-  static Future<List<PhotoModel>?> fetchImages() async {
-    String accessKey = "8fZZLAtYG6LkkNbNsa7-_35CESYO-62CM5zQfc_-Nas";
-    String apiUrl = "https://api.unsplash.com/photos/";
+  static Future<List<OrderListModel>?> fetchOrders() async {
     var headers = {
-      'Authorization': 'Client-ID $accessKey',
+      'Accept':'application/json',
+      'access-token': '$accessToken',
     };
-    var response = await http.get(Uri.parse(apiUrl), headers: headers);
+    var response = await http.get(Uri.parse(apiOrderUrl), headers: headers);
 
     if (response != null && response.statusCode == 200) {
       var jsonString = response.body;
-      return photoModelFromJson(jsonString);
+      print("response${response.body}");
+      return orderListModelFromJson(jsonString);
     } else {
-      // Handle the error gracefully
       print('Failed to fetch images: ${response?.statusCode}');
       // Show an error message or handle it accordingly
       return null;

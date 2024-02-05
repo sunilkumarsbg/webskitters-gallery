@@ -1,4 +1,5 @@
-class Constants {
-  static const String accessKey = "8fZZLAtYG6LkkNbNsa7-_35CESYO-62CM5zQfc_-Nas";
-  static const String apiUrl = "https://api.unsplash.com/photos/";
+class ImageConstants {
+  static const String profileImage = "";
 }
+String accessToken ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzA5Mjg5MzU4LCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTAwMDQ3NTUxNCJ9.UOg0Kcx8BzdS4xUQxhrwTJxJr5AzrGTU0nmqx7Q5DHfw1UCsbrTob3ydiKh4p-p2vaVt2Ds385Bip_Y8EHL93g";
+String apiOrderUrl = "https://api.dhan.co/orders";
